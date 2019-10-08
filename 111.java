@@ -1,3 +1,5 @@
+// check the minimum depth of a bs
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -33,4 +35,47 @@ class Solution {
 
         return min_depth + 1;
     }
+}
+
+class Solution1 {
+  public int minDepth(TreeNode root) {
+
+    if (root == null) {
+      return 0;
+    }
+
+    // parenthesis should appear after the "<>" sign
+    Stack<TreeNode> tree = new Stack<TreeNode>();
+    Stack<Integer> value = new Stack<Integer>();
+
+    int min_depth = Integer.MAX_VALUE;
+    tree.push(root);
+    value.push(min_depth);
+
+    while(tree.isEmpty() == false) {
+      TreeNode temp = tree.pop();
+      int local_value = value.pop();
+
+      // here you have to consider the condition that
+      // you only reach the leaf node to get the
+      // depth value
+      if (temp.left == null && temp.right == null){
+        min_depth = Math.min(min_depth);
+      }
+
+      if (temp.left != null) {
+        tree.push(temp.left);
+        value.push(local_value + 1);
+      }
+
+      if (temp.right != null) {
+        tree.push(temp.right);
+        value.push(local_value + 1);
+      }
+
+    }
+
+    return min_depth;
+
+  }
 }

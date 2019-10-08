@@ -1,3 +1,5 @@
+// check element in a 2D matrix
+
 class Solution {
     public boolean searchMatrix(int[][] matrix, int target) {
         // check egde cases where matrix is null
@@ -40,8 +42,6 @@ class Solution {
 
 
         }
-
-
       return false;
     }
 }

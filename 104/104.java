@@ -36,16 +36,20 @@ class Solution2{
     if(root == null) {
       return 0;
     }
+    // new stack here to check the values
+    // LIFO
     Stack<TreeNode> tree = new Stack<TreeNode>();
     Stack<Integer> value = new Stack<Integer>();
     int local_max = Integer.MIN_VALUE;
-
+    // add the root first into the stack
     tree.push(root);
     value.push(1);
 
     while(tree.isEmpty() == false) {
+      // this is how you
       TreeNode node = tree.pop();
       int temp = value.pop();
+      
       local_max = Math.max(local_max, temp);
 
       if(node.left != null) {

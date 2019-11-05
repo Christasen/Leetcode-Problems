@@ -1,0 +1,60 @@
+/*
+// Definition for a Node.
+class Node {
+    public int val;
+    public Node left;
+    public Node right;
+
+    public Node() {}
+
+    public Node(int _val,Node _left,Node _right) {
+        val = _val;
+        left = _left;
+        right = _right;
+    }
+};
+*/
+// from the output we can see that we want to get all node from bst
+// and sort them in ascending order
+// this is very similar to our BST inorder traversal -> left -> middle -> right
+// by observing this pattern, we will use recursion to solve this problem
+
+// create a head of a linked list
+
+// store all the nodes into another list -> tail -> global variable here
+
+// connect head and tail
+// O(n), traverse the tree for few times
+// O(n) -> worst case. best case O(logn) -? recursion stack of size tree height;
+
+class Solution {
+    Node previous = null; // store the result of the nodes list
+    public Node treeToDoublyList(Node root) {
+        // edge cases
+        if (root == null) return null;
+
+        Node dummy = new Node(0, null, null);
+        previous = dummy;
+
+        // store nodes in the previous nodes by using helper function
+        helper(root);
+
+        // connect the dummy and previous
+        previous.right = dummy.right;
+        dummy.right.left = previous;
+
+        return dummy.right;
+    }
+
+    public void helper(Node current) {
+        if (current == null) return;
+        // left
+        helper(current.left);
+        // middle
+        previous.right = current;
+        current.left = previous;
+        previous = current;
+        // right
+        helper(current.right);
+    }
+}
